@@ -18,12 +18,15 @@ export const SelectedNodeProvider: FC<PropsWithChildren> = ({ children }) => {
         withOverlay={false}
         opened={!!entity}
         onClose={selectNode}
-        title={selected?.type === "user" ? "User" : "Repository"}
+        title={
+          selected?.type === "user" ? (
+            <Avatar src={(entity as BasicLogin).avatarUrl} />
+          ) : (
+            "Repository"
+          )
+        }
         position="right"
       >
-        {selected?.type === "user" && (
-          <Avatar src={(entity as BasicLogin).avatarUrl} />
-        )}
         {JSON.stringify(entity)}
       </Drawer>
       {children}

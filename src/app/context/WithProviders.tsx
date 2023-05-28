@@ -1,9 +1,25 @@
 "use client";
 import { SessionProvider, useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import { FC, PropsWithChildren, createContext, useEffect } from "react";
 import AppHeader from "../components/Header";
 import { setToken } from "../graphql";
 import { useEntities } from "../hooks";
+
+const InitContext = createContext(null);
+
+const InitProvider: FC<PropsWithChildren> = ({ children }) => {
+  const urlSearchParams = useSearchParams();
+  const { fetchRepoUsers } = useEntities();
+
+  useEffect(() => {
+    const id = urlSearchParams.get("id");
+    console.log(id);
+    if (!id) fetchRepoUsers("codesandbox/sandpack");
+  }, [fetchRepoUsers, urlSearchParams]);
+
+  return <InitContext.Provider value={null}>{children}</InitContext.Provider>;
+};
 
 const AuthContext = createContext(null);
 
@@ -14,7 +30,6 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
   useEffect(() => {
     if (!session) return;
     setToken(session?.accessToken || "");
-    fetchRepoUsers("pmndrs/react-spring");
   }, [fetchRepoUsers, session]);
 
   if (!session) return null;
@@ -28,7 +43,12 @@ export const WithProviders: FC<PropsWithChildren> = ({ children }) => (
   <WithProvidersContext.Provider value={null}>
     <SessionProvider>
       <AppHeader />
-      <AuthProvider>{children}</AuthProvider>
+      <AuthProvider>
+        <>
+          <InitProvider />
+          {children}
+        </>
+      </AuthProvider>
     </SessionProvider>
   </WithProvidersContext.Provider>
 );

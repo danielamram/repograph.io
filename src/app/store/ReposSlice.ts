@@ -23,12 +23,33 @@ const createReposSlice: StateCreator<
   fetchRepoUsers: async (nameWithOwner: string) => {
     const cons = await getContributors(nameWithOwner);
     const logins = cons.map(transformConToLogin);
+
     set((state) => ({
-      repositories: [...state.repositories, { nameWithOwner }],
-      users: [...state.users, ...logins],
+      repositories: [
+        ...state.repositories,
+        ...(state.repositories.find(
+          (repo) => repo.nameWithOwner === nameWithOwner
+        )
+          ? []
+          : [{ nameWithOwner }]),
+      ],
+      users: [
+        ...state.users,
+        ...logins.filter(
+          ({ login }) => !state.users.some((u) => u.login === login)
+        ),
+      ],
       reposToUsers: {
         ...state.reposToUsers,
-        [nameWithOwner]: logins.map((l) => l.login),
+        [nameWithOwner]: [
+          ...(state.reposToUsers[nameWithOwner] || []),
+          ...logins
+            .map((l) => l.login)
+            .filter(
+              (login) =>
+                !(state.reposToUsers[nameWithOwner] || []).includes(login)
+            ),
+        ],
       },
     }));
   },

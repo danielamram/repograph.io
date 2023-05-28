@@ -1,12 +1,14 @@
 import type { CodegenConfig } from "@graphql-codegen/cli";
 
+const token = process.env.GITHUB_TOKEN;
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: {
     "https://api.github.com/graphql": {
       headers: {
         "user-agent": "node.js",
-        Authorization: "bearer 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",
+        Authorization: `Bearer ${token}`,
       },
     },
   },

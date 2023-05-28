@@ -4,6 +4,7 @@ import {
   Button,
   Group,
   Header,
+  Kbd,
   Menu,
   Text,
   UnstyledButton,
@@ -11,7 +12,8 @@ import {
   rem,
 } from "@mantine/core";
 import { useDisclosure } from "@mantine/hooks";
-import { IconLogout } from "@tabler/icons-react";
+import { openSpotlight } from "@mantine/spotlight";
+import { IconLogout, IconSearch } from "@tabler/icons-react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { FC, SVGProps } from "react";
 
@@ -143,6 +145,32 @@ const AppHeader = () => {
         <Logo width={50} />
 
         <Group className={classes.hiddenMobile}>
+          <UnstyledButton
+            sx={(theme) => ({
+              borderRadius: theme.radius.md,
+              padding: `6px ${theme.spacing.md}`,
+              backgroundColor:
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[1]
+                  : theme.colors.gray[0],
+              border: `${rem(1)} solid ${
+                theme.colorScheme === "dark"
+                  ? theme.colors.dark[5]
+                  : theme.colors.gray[1]
+              }`,
+            })}
+            onClick={() => openSpotlight()}
+          >
+            <Group spacing="xs">
+              <IconSearch size={rem(14)} stroke={1.5} />
+              <Text size="sm" color="dimmed" pr={80}>
+                Search...
+              </Text>
+              <Text weight={700}>
+                <Kbd>/</Kbd>
+              </Text>
+            </Group>
+          </UnstyledButton>
           {session ? (
             <Menu
               width={260}

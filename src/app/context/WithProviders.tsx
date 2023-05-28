@@ -5,18 +5,20 @@ import { FC, PropsWithChildren, createContext, useEffect } from "react";
 import AppHeader from "../components/Header";
 import { setToken } from "../graphql";
 import { useEntities } from "../hooks";
+import WithSpotlight from "./WithSpotlight";
 
 const InitContext = createContext(null);
 
 const InitProvider: FC<PropsWithChildren> = ({ children }) => {
   const urlSearchParams = useSearchParams();
-  const { fetchRepoUsers } = useEntities();
+  const { fetchRepoUsers, fetchUserRepos } = useEntities();
 
   useEffect(() => {
     const id = urlSearchParams.get("id");
-    console.log(id);
     if (!id) fetchRepoUsers("codesandbox/sandpack");
-  }, [fetchRepoUsers, urlSearchParams]);
+    else if (id.includes("/")) fetchRepoUsers(id);
+    else fetchUserRepos(id);
+  }, [fetchRepoUsers, fetchUserRepos, urlSearchParams]);
 
   return <InitContext.Provider value={null}>{children}</InitContext.Provider>;
 };
@@ -45,6 +47,7 @@ export const WithProviders: FC<PropsWithChildren> = ({ children }) => (
       <AppHeader />
       <AuthProvider>
         <>
+          <WithSpotlight />
           <InitProvider />
           {children}
         </>

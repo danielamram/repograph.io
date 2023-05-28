@@ -7,6 +7,7 @@ export const useEntities = () => {
     reposToUsers: state.reposToUsers,
     fetchRepoUsers: state.fetchRepoUsers,
     fetchUserRepos: state.fetchUserRepos,
+    reset: state.reset,
   }));
 
   return { ...state };

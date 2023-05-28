@@ -8,6 +8,7 @@ export interface ReposSlice {
   repositories: BasicRepository[];
   users: BasicLogin[];
   reposToUsers: Record<string, string[]>;
+  reset: () => void;
   fetchRepoUsers: (nameWithOwner: string) => Promise<void>;
   fetchUserRepos: (login: string) => Promise<void>;
 }
@@ -20,6 +21,13 @@ const createReposSlice: StateCreator<
   repositories: [],
   users: [],
   reposToUsers: {},
+  reset: () => {
+    set(() => ({
+      repositories: [],
+      users: [],
+      reposToUsers: {},
+    }));
+  },
   fetchRepoUsers: async (nameWithOwner: string) => {
     const cons = await getContributors(nameWithOwner);
     const logins = cons.map(transformConToLogin);

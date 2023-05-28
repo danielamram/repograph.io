@@ -135,9 +135,8 @@ const AppHeader = () => {
 
   return (
     <Header
-      bg="transparent"
-      withBorder={false}
-      className="absolute z-10 w-full"
+      // withBorder={false}
+      className="!absolute w-full"
       height={60}
       px="md"
     >
@@ -151,7 +150,7 @@ const AppHeader = () => {
               padding: `6px ${theme.spacing.md}`,
               backgroundColor:
                 theme.colorScheme === "dark"
-                  ? theme.colors.dark[1]
+                  ? theme.colors.dark[6]
                   : theme.colors.gray[0],
               border: `${rem(1)} solid ${
                 theme.colorScheme === "dark"
@@ -251,9 +250,7 @@ const AppHeader = () => {
               </Menu.Dropdown>
             </Menu>
           ) : (
-            <Button onClick={() => signIn("github")} variant="default">
-              Log in
-            </Button>
+            <Button onClick={() => signIn("github")}>Log in</Button>
           )}
         </Group>
 

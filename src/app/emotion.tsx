@@ -28,6 +28,7 @@ export default function RootStyleRegistry({
   return (
     <CacheProvider value={cache}>
       <MantineProvider
+        emotionCache={cache}
         theme={{
           colorScheme: "dark",
         }}

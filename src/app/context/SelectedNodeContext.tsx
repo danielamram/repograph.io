@@ -15,6 +15,18 @@ export const SelectedNodeProvider: FC<PropsWithChildren> = ({ children }) => {
   return (
     <SelectedNodeContext.Provider value={null}>
       <Drawer
+        styles={(theme) => ({
+          inner: { marginTop: 60 },
+          content: {
+            boxShadow: theme.colorScheme === "dark" ? "none" : theme.shadows.sm,
+            borderLeft:
+              theme.colorScheme === "dark"
+                ? `1px solid ${theme.colors.gray[9]}`
+                : `1px solid ${theme.colors.gray[2]}`,
+          },
+        })}
+        withinPortal
+        className="z-100"
         size="sm"
         withOverlay={false}
         opened={!!entity}

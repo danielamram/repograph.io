@@ -1,0 +1,15 @@
+query User($login: String!) {
+  user(login: $login) {
+    avatarUrl
+    name
+    login
+    contributionsCollection {
+      pullRequestContributionsByRepository {
+        repository {
+          id
+          nameWithOwner
+        }
+      }
+    }
+  }
+}

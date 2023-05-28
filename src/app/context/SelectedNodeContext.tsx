@@ -1,7 +1,8 @@
 "use client";
-import { Drawer } from "@mantine/core";
+import { Avatar, Drawer } from "@mantine/core";
 import { FC, PropsWithChildren, createContext } from "react";
 import { useEntity, useSelected } from "../hooks";
+import { BasicLogin } from "../types";
 
 const SelectedNodeContext = createContext(null);
 
@@ -20,6 +21,9 @@ export const SelectedNodeProvider: FC<PropsWithChildren> = ({ children }) => {
         title={selected?.type === "user" ? "User" : "Repository"}
         position="right"
       >
+        {selected?.type === "user" && (
+          <Avatar src={(entity as BasicLogin).avatarUrl} />
+        )}
         {JSON.stringify(entity)}
       </Drawer>
       {children}

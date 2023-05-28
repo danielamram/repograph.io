@@ -1,8 +1,9 @@
 "use client";
-import { Avatar, Drawer } from "@mantine/core";
+import { Drawer } from "@mantine/core";
 import { FC, PropsWithChildren, createContext } from "react";
+import EntityDetails from "../components/EntityDetails";
+import SideBarTitle from "../components/SideBarTitle";
 import { useEntity, useSelected } from "../hooks";
-import { BasicLogin } from "../types";
 
 const SelectedNodeContext = createContext(null);
 
@@ -18,16 +19,10 @@ export const SelectedNodeProvider: FC<PropsWithChildren> = ({ children }) => {
         withOverlay={false}
         opened={!!entity}
         onClose={selectNode}
-        title={
-          selected?.type === "user" ? (
-            <Avatar src={(entity as BasicLogin).avatarUrl} />
-          ) : (
-            "Repository"
-          )
-        }
+        title={<SideBarTitle entity={entity} type={selected?.type} />}
         position="right"
       >
-        {JSON.stringify(entity)}
+        {entity && <EntityDetails entity={entity} type={selected?.type} />}
       </Drawer>
       {children}
     </SelectedNodeContext.Provider>

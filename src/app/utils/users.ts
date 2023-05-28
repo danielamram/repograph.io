@@ -19,3 +19,14 @@ export const transformToRepos = (userQuery: UserQuery): BasicRepository[] => {
     nameWithOwner,
   }));
 };
+
+export const getReposByUser = (
+  login: string,
+  reposToUsers: Record<string, string[]>
+) =>
+  Object.keys(reposToUsers).reduce((acc, repo) => {
+    if (reposToUsers[repo].includes(login)) {
+      acc.push(repo);
+    }
+    return acc;
+  }, [] as string[]);

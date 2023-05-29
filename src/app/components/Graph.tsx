@@ -22,9 +22,6 @@ const Graph: FC<{ graph: IGraph; onNodeClick: (data?: NodeData) => void }> = ({
 
   return (
     <GraphCanvas
-      onNodePointerOver={(node) => {
-        console.log(node);
-      }}
       theme={darkTheme}
       ref={graphRef}
       onNodeClick={(node, props) => {

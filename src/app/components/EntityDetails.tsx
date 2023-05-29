@@ -1,7 +1,9 @@
-import { Avatar, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { Avatar, Badge, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { IconStar } from "@tabler/icons-react";
 import { FC } from "react";
 import { useEntities } from "../hooks";
 import { BasicLogin, BasicRepository, EntityType } from "../types";
+import { toReadableDate } from "../utils/date";
 import { getReposByUser } from "../utils/users";
 
 const UserDetails: FC<{ user: BasicLogin; repos: string[] }> = ({
@@ -46,32 +48,61 @@ const RepoDetails: FC<{ repo: BasicRepository; users: BasicLogin[] }> = ({
   users,
 }) => {
   return (
-    <>
-      <Title fw="400" order={3}>
-        Contributors: {users.length}
-      </Title>
-      <Stack mt="lg">
-        {users.map((user) => (
-          <Card
-            onClick={() =>
-              window.open(`https://github.com/${user.login}`, "_blank")
-            }
-            sx={(theme) => ({
-              "&:hover": {
-                backgroundColor: theme.colors.gray[8],
-              },
-            })}
-            component="button"
-            key={user.login}
-          >
-            <Group position="left">
-              <Avatar color="gray" size="md" src={user.avatarUrl} />
-              <Text>{user.login}</Text>
-            </Group>
-          </Card>
-        ))}
+    <Stack spacing="lg">
+      <Stack spacing="xs">
+        <Group position="apart">
+          <Group spacing={4}>
+            <Text fw="300" size="sm" color="dimmed">
+              Last updated
+            </Text>
+            <Text>
+              {toReadableDate(new Date(repo.extraData?.pushed_at || ""))}
+            </Text>
+          </Group>
+          <Group spacing={4}>
+            <IconStar size={16} />
+            <Text>{repo.extraData?.stargazers_count}</Text>
+          </Group>
+        </Group>
+        <Group spacing="xs">
+          {(repo.extraData?.topics || []).map((topic) => (
+            <Badge key={topic}>{topic}</Badge>
+          ))}
+        </Group>
       </Stack>
-    </>
+      <Stack spacing="xs">
+        <Text fw="300" size="sm" color="dimmed">
+          Description
+        </Text>
+        <Text>{repo.extraData?.description}</Text>
+      </Stack>
+      <Stack spacing="xs">
+        <Text fw="300" size="sm" color="dimmed">
+          Contributors ({users.length})
+        </Text>
+        <Stack>
+          {users.map((user) => (
+            <Card
+              onClick={() =>
+                window.open(`https://github.com/${user.login}`, "_blank")
+              }
+              sx={(theme) => ({
+                "&:hover": {
+                  backgroundColor: theme.colors.gray[8],
+                },
+              })}
+              component="button"
+              key={user.login}
+            >
+              <Group position="left">
+                <Avatar color="gray" size="md" src={user.avatarUrl} />
+                <Text>{user.login}</Text>
+              </Group>
+            </Card>
+          ))}
+        </Stack>
+      </Stack>
+    </Stack>
   );
 };
 

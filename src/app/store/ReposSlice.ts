@@ -1,5 +1,9 @@
 import { StateCreator } from "zustand";
-import { getContributors, getRepositoriesByLogin } from "../api/gh";
+import {
+  getContributors,
+  getRepositoriesByLogin,
+  getRepository,
+} from "../api/gh";
 import { BasicLogin, BasicRepository } from "../types";
 import { transformConToLogin, transformToRepos } from "../utils/users";
 import { SelectedNodeSlice } from "./SelectedNodeSlice";
@@ -9,6 +13,7 @@ export interface ReposSlice {
   users: BasicLogin[];
   reposToUsers: Record<string, string[]>;
   reset: () => void;
+  fetchRepoData: (nameWithOwner: string) => Promise<void>;
   fetchRepoUsers: (nameWithOwner: string) => Promise<void>;
   fetchUserRepos: (login: string) => Promise<void>;
 }
@@ -17,7 +22,7 @@ const createReposSlice: StateCreator<
   [],
   [],
   ReposSlice
-> = (set) => ({
+> = (set, get) => ({
   repositories: [],
   users: [],
   reposToUsers: {},
@@ -26,6 +31,26 @@ const createReposSlice: StateCreator<
       repositories: [],
       users: [],
       reposToUsers: {},
+    }));
+  },
+  fetchRepoData: async (nameWithOwner: string) => {
+    if (
+      get().repositories.find((repo) => repo.nameWithOwner === nameWithOwner)
+        ?.extraData
+    )
+      return;
+
+    const extraData = await getRepository(nameWithOwner);
+
+    set((state) => ({
+      repositories: state.repositories.map((repo) =>
+        repo.nameWithOwner === nameWithOwner
+          ? {
+              ...repo,
+              extraData,
+            }
+          : repo
+      ),
     }));
   },
   fetchRepoUsers: async (nameWithOwner: string) => {

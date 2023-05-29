@@ -1,5 +1,6 @@
 export interface BasicRepository {
   nameWithOwner: string;
+  extraData?: Repository;
 }
 
 export interface Repository {

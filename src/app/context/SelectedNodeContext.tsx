@@ -1,16 +1,22 @@
 "use client";
 import { Drawer } from "@mantine/core";
-import { FC, PropsWithChildren, createContext } from "react";
+import { FC, PropsWithChildren, createContext, useEffect } from "react";
 import EntityDetails from "../components/EntityDetails";
 import SideBarTitle from "../components/SideBarTitle";
-import { useEntity, useSelected } from "../hooks";
+import { useEntities, useEntity, useSelected } from "../hooks";
 
 const SelectedNodeContext = createContext(null);
 
 export const SelectedNodeProvider: FC<PropsWithChildren> = ({ children }) => {
+  const { fetchRepoData } = useEntities();
   const { selected, selectNode } = useSelected();
 
   const entity = useEntity({ entity: selected });
+
+  useEffect(() => {
+    if (!selected || selected.type === "user") return;
+    fetchRepoData(selected.id);
+  }, [selected, fetchRepoData]);
 
   return (
     <SelectedNodeContext.Provider value={null}>

@@ -27,8 +27,8 @@ export const callApi = async <T>(url: string) => {
 export const getContributors = async (nameWithOwner: string) =>
   callApi<Contributor[]>(`/repos/${nameWithOwner}/contributors`);
 
-export const getRepository = async (owner: string, repository: string) =>
-  callApi<Repository>(`/repos/${owner}/${repository}`);
+export const getRepository = async (nameWithOwner: string) =>
+  callApi<Repository>(`/repos/${nameWithOwner}`);
 
 // export const getRepositoriesByOwner = async (owner: string) => {
 //   const repos = await callApi<Repository[]>(`/users/${owner}/repos`);

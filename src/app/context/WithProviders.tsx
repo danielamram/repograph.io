@@ -1,4 +1,5 @@
 "use client";
+import * as FullStory from "@fullstory/browser";
 import { SessionProvider, useSession } from "next-auth/react";
 import { useSearchParams } from "next/navigation";
 import { FC, PropsWithChildren, createContext, useEffect } from "react";
@@ -32,6 +33,14 @@ const AuthProvider: FC<PropsWithChildren> = ({ children }) => {
 
   useEffect(() => {
     if (!session) return;
+    if (session.user?.email) {
+      FullStory.identify(session.user.email, {
+        email: session.user.email,
+        displayName: session.user.name || "",
+        image: session.user.image || "",
+      });
+    }
+
     setToken(session?.accessToken || "");
   }, [fetchRepoUsers, session]);
 

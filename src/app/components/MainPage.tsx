@@ -1,4 +1,5 @@
 "use client";
+import * as FullStory from "@fullstory/browser";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { GITHUB_TOKEN } from "../graphql";
@@ -17,6 +18,10 @@ const MainPage = () => {
   const { selectNode } = useSelected();
   const { fetchRepoUsers, repositories, users, reposToUsers, fetchUserRepos } =
     useEntities();
+
+  useEffect(() => {
+    FullStory.init({ orgId: "o-1MA372-na1" });
+  }, []);
 
   useEffect(() => {
     const newGraph = buildGraph(repositories, users, reposToUsers);

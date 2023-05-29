@@ -1,13 +1,15 @@
 "use client";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { useEntities, useSelected } from "../hooks";
+import { GITHUB_TOKEN } from "../graphql";
+import { useEntities, useLoginGuard, useSelected } from "../hooks";
 import { BasicLogin, BasicRepository, IGraph, NodeData } from "../types";
 import { buildGraph } from "../utils/graph";
 
 const Graph = dynamic(() => import("./Graph"), { ssr: false });
 
 const MainPage = () => {
+  const { toggleShow } = useLoginGuard();
   const [graph, setGraph] = useState<IGraph>({
     nodes: [],
     edges: [],
@@ -22,6 +24,11 @@ const MainPage = () => {
   }, [repositories, users, reposToUsers]);
 
   const onNodeClick = async (data?: NodeData) => {
+    if (!GITHUB_TOKEN) {
+      toggleShow();
+      return;
+    }
+
     if (!data) {
       selectNode();
       return;
@@ -42,7 +49,11 @@ const MainPage = () => {
     }
   };
 
-  return <Graph onNodeClick={onNodeClick} graph={graph} />;
+  return (
+    <div className="relative h-full w-full">
+      <Graph onNodeClick={onNodeClick} graph={graph} />
+    </div>
+  );
 };
 
 export default MainPage;

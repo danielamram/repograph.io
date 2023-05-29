@@ -1,11 +1,25 @@
-import { UserDocument, UserQuery, client } from "../graphql";
+import { GITHUB_TOKEN, UserDocument, UserQuery, client } from "../graphql";
 import { Contributor } from "../types";
 import { Repository } from "../types/Repository";
 
 const API_URL = "https://api.github.com";
 
 export const callApi = async <T>(url: string) => {
-  const response = await fetch(`${API_URL}${url}`);
+  let headers: HeadersInit = {
+    Accept: "application/vnd.github.v3+json",
+    "Content-Type": "application/json",
+  };
+
+  if (GITHUB_TOKEN) {
+    headers = {
+      ...headers,
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+    };
+  }
+
+  const response = await fetch(`${API_URL}${url}`, {
+    headers,
+  });
   const data = await response.json();
   return data as T;
 };

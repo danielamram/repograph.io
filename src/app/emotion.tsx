@@ -31,6 +31,7 @@ export default function RootStyleRegistry({
         emotionCache={cache}
         theme={{
           colorScheme: "dark",
+          focusRing: "never",
         }}
       >
         {children}

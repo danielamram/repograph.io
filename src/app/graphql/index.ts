@@ -3,7 +3,7 @@ import { setContext } from "@apollo/client/link/context";
 
 const githubGraphqlURI = process.env.NEXT_PUBLIC_GITHUB_GRAPHQL_URI;
 
-let GITHUB_TOKEN = "";
+export let GITHUB_TOKEN = "";
 const setToken = (token: string) => (GITHUB_TOKEN = token);
 
 const link = new HttpLink({ uri: githubGraphqlURI });

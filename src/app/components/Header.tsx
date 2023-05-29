@@ -135,8 +135,7 @@ const AppHeader = () => {
 
   return (
     <Header
-      // withBorder={false}
-      className="!absolute w-full"
+      // className="!absolute w-full"
       height={60}
       px="md"
     >
@@ -198,49 +197,7 @@ const AppHeader = () => {
                 </UnstyledButton>
               </Menu.Target>
               <Menu.Dropdown>
-                {/* <Menu.Item
-                  icon={
-                    <IconHeart
-                      size="0.9rem"
-                      color={theme.colors.red[6]}
-                      stroke={1.5}
-                    />
-                  }
-                >
-                  Liked posts
-                </Menu.Item>
-                <Menu.Item
-                  icon={
-                    <IconStar
-                      size="0.9rem"
-                      color={theme.colors.yellow[6]}
-                      stroke={1.5}
-                    />
-                  }
-                >
-                  Saved posts
-                </Menu.Item>
-                <Menu.Item
-                  icon={
-                    <IconMessage
-                      size="0.9rem"
-                      color={theme.colors.blue[6]}
-                      stroke={1.5}
-                    />
-                  }
-                >
-                  Your comments
-                </Menu.Item> */}
-
-                {/* <Menu.Label>Settings</Menu.Label> */}
-                {/* <Menu.Item icon={<IconSettings size="0.9rem" stroke={1.5} />}>
-                  Account settings
-                </Menu.Item>
-                <Menu.Item
-                  icon={<IconSwitchHorizontal size="0.9rem" stroke={1.5} />}
-                >
-                  Change account
-                </Menu.Item> */}
+                <Menu.Label>Account</Menu.Label>
                 <Menu.Item
                   onClick={() => signOut()}
                   icon={<IconLogout size="0.9rem" stroke={1.5} />}

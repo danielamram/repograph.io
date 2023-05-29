@@ -1,16 +1,7 @@
-import { Button, Group } from "@mantine/core";
-import { SpotlightProvider, spotlight } from "@mantine/spotlight";
+import { SpotlightProvider } from "@mantine/spotlight";
 import { IconSearch } from "@tabler/icons-react";
 import { useState } from "react";
 import { useEntities } from "../hooks";
-
-function SpotlightControl() {
-  return (
-    <Group position="center">
-      <Button onClick={spotlight.open}>Open spotlight</Button>
-    </Group>
-  );
-}
 
 const WithSpotlight = () => {
   const { fetchRepoUsers, fetchUserRepos, reset } = useEntities();

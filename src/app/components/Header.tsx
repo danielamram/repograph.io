@@ -98,7 +98,7 @@ const Logo: FC<SVGProps<SVGSVGElement>> = (props) => (
       cy="55.696"
       r="40.4755"
       transform="rotate(-165 56.1491 55.696)"
-      stroke="#5C5F66"
+      stroke="#5c5f66"
       strokeWidth="10"
     />
     <circle
@@ -106,22 +106,21 @@ const Logo: FC<SVGProps<SVGSVGElement>> = (props) => (
       cy="27.8704"
       r="17.6034"
       transform="rotate(60 31.1699 27.8704)"
-      fill="#CC5DE8"
+      fill="#ae3ec9"
     />
     <circle
       cx="44.9814"
       cy="91.5583"
       r="21.2708"
       transform="rotate(60 44.9814 91.5583)"
-      fill="#CC5DE8"
+      fill="#ae3ec9"
     />
     <circle
       cx="91.2097"
       cy="43.9015"
       r="28.8391"
       transform="rotate(60 91.2097 43.9015)"
-      fill="#CC5DE8"
-      stroke="#CC5DE8"
+      fill="#ae3ec9"
     />
   </svg>
 );

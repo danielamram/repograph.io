@@ -6,7 +6,7 @@
 
 Welcome to RepoGraph.io, an application that enables you to explore GitHub repositories and their contributors in a visually appealing and interactive way. This tool allows you to gain insights into repositories and the people who contribute to them, facilitating collaboration and discovery in the GitHub community.
 
-![RepoGraph.io Screenshot](https://your-username.github.io/repo-graph/screenshot.png)
+![RepoGraph.io Screenshot]([https://your-username.github.io/repo-graph/screenshot.png](https://github.com/danielamram/repograph.io/blob/main/assets/screenshot.png?raw=true))
 
 ## Features
 

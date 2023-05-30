@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Burger,
   Button,
   Group,
   Header,
@@ -141,7 +140,7 @@ const AppHeader = () => {
       <Group position="apart" sx={{ height: "100%" }}>
         <Logo width={50} />
 
-        <Group className={classes.hiddenMobile}>
+        <Group>
           <UnstyledButton
             sx={(theme) => ({
               borderRadius: theme.radius.md,
@@ -168,6 +167,7 @@ const AppHeader = () => {
               </Text>
             </Group>
           </UnstyledButton>
+
           {session ? (
             <Menu
               width={260}
@@ -186,11 +186,18 @@ const AppHeader = () => {
                       src={session.user?.image}
                       alt={session.user?.name || "profile image"}
                       radius="xl"
-                      size={20}
+                      // size="sm"
                     />
-                    <Text weight={500} size="sm" sx={{ lineHeight: 1 }} mr={3}>
-                      {session.user?.name}
-                    </Text>
+                    <div className={classes.hiddenMobile}>
+                      <Text
+                        weight={500}
+                        size="sm"
+                        sx={{ lineHeight: 1 }}
+                        mr={3}
+                      >
+                        {session.user?.name}
+                      </Text>
+                    </div>
                     {/* <IconChevronDown size={rem(12)} stroke={1.5} /> */}
                   </Group>
                 </UnstyledButton>
@@ -209,12 +216,6 @@ const AppHeader = () => {
             <Button onClick={() => signIn("github")}>Log in</Button>
           )}
         </Group>
-
-        <Burger
-          opened={drawerOpened}
-          onClick={toggleDrawer}
-          className={classes.hiddenDesktop}
-        />
       </Group>
     </Header>
   );

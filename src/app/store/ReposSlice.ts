@@ -3,6 +3,7 @@ import {
   getContributors,
   getRepositoriesByLogin,
   getRepository,
+  getUser,
 } from "../api/gh";
 import { BasicLogin, BasicRepository } from "../types";
 import { transformConToLogin, transformToRepos } from "../utils/users";
@@ -14,6 +15,7 @@ export interface ReposSlice {
   reposToUsers: Record<string, string[]>;
   reset: () => void;
   fetchRepoData: (nameWithOwner: string) => Promise<void>;
+  fetchUserData: (login: string) => Promise<void>;
   fetchRepoUsers: (nameWithOwner: string) => Promise<void>;
   fetchUserRepos: (login: string) => Promise<void>;
 }
@@ -31,6 +33,22 @@ const createReposSlice: StateCreator<
       repositories: [],
       users: [],
       reposToUsers: {},
+    }));
+  },
+  fetchUserData: async (login: string) => {
+    if (get().users.find((user) => user.login === login)?.extraData) return;
+
+    const extraData = await getUser(login);
+
+    set((state) => ({
+      users: state.users.map((user) =>
+        user.login === login
+          ? {
+              ...user,
+              extraData,
+            }
+          : user
+      ),
     }));
   },
   fetchRepoData: async (nameWithOwner: string) => {

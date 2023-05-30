@@ -6,6 +6,7 @@ export const useEntities = () => {
     users: state.users,
     reposToUsers: state.reposToUsers,
     fetchRepoData: state.fetchRepoData,
+    fetchUserData: state.fetchUserData,
     fetchRepoUsers: state.fetchRepoUsers,
     fetchUserRepos: state.fetchUserRepos,
     reset: state.reset,

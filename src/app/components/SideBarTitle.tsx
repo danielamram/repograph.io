@@ -11,7 +11,7 @@ export const UserTitle: FC<{ entity: BasicLogin }> = ({ entity }) => (
 
 export const RepoTitle: FC<{ entity: BasicRepository }> = ({ entity }) => (
   <Group>
-    <Avatar src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg" />
+    <Avatar src="/github.svg" />
     <Text>{entity.nameWithOwner}</Text>
   </Group>
 );

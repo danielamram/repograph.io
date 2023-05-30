@@ -1,6 +1,9 @@
+import { User } from "./User";
+
 export interface BasicLogin {
   login: string;
   avatarUrl: string;
+  extraData?: User;
 }
 
 export interface Contributor {

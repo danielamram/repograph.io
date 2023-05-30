@@ -1,4 +1,4 @@
-import { Avatar, Badge, Card, Group, Stack, Text, Title } from "@mantine/core";
+import { Avatar, Badge, Card, Group, Stack, Text } from "@mantine/core";
 import { IconStar } from "@tabler/icons-react";
 import { FC } from "react";
 import { useEntities } from "../hooks";
@@ -10,36 +10,55 @@ const UserDetails: FC<{ user: BasicLogin; repos: string[] }> = ({
   user,
   repos,
 }) => {
-  console.log(repos);
   return (
-    <>
-      <Title fw="400" order={3}>
-        Repositories: {repos.length}
-      </Title>
-      <Stack mt="lg">
-        {repos.map((repo) => (
-          <Card
-            onClick={() => window.open(`https://github.com/${repo}`, "_blank")}
-            sx={(theme) => ({
-              "&:hover": {
-                backgroundColor: theme.colors.gray[8],
-              },
-            })}
-            component="button"
-            key={repo}
-          >
-            <Group position="left">
-              <Avatar
-                color="gray"
-                size="md"
-                src="https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg"
-              />
-              <Text>{repo}</Text>
-            </Group>
-          </Card>
-        ))}
+    <Stack spacing="lg">
+      <Group position="center">
+        <Group spacing={4}>
+          <Text fw="300" size="sm" color="dimmed">
+            Following:
+          </Text>
+          <Text>{user.extraData?.following}</Text>
+        </Group>
+        <Group spacing={4}>
+          <Text fw="300" size="sm" color="dimmed">
+            Followers:
+          </Text>
+          <Text>{user.extraData?.followers}</Text>
+        </Group>
+      </Group>
+      <Stack spacing="xs">
+        <Text fw="300" size="sm" color="dimmed">
+          Bio
+        </Text>
+        <Text>{user.extraData?.bio}</Text>
       </Stack>
-    </>
+      <Stack spacing="xs">
+        <Text fw="300" size="sm" color="dimmed">
+          Repositories ({repos.length})
+        </Text>
+        <Stack>
+          {repos.map((repo) => (
+            <Card
+              onClick={() =>
+                window.open(`https://github.com/${repo}`, "_blank")
+              }
+              sx={(theme) => ({
+                "&:hover": {
+                  backgroundColor: theme.colors.gray[8],
+                },
+              })}
+              component="button"
+              key={repo}
+            >
+              <Group position="left">
+                <Avatar color="gray" size="md" src="/github.svg" />
+                <Text>{repo}</Text>
+              </Group>
+            </Card>
+          ))}
+        </Stack>
+      </Stack>
+    </Stack>
   );
 };
 

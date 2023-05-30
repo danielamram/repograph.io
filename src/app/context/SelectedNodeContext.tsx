@@ -8,15 +8,17 @@ import { useEntities, useEntity, useSelected } from "../hooks";
 const SelectedNodeContext = createContext(null);
 
 export const SelectedNodeProvider: FC<PropsWithChildren> = ({ children }) => {
-  const { fetchRepoData } = useEntities();
+  const { fetchRepoData, fetchUserData } = useEntities();
   const { selected, selectNode } = useSelected();
 
   const entity = useEntity({ entity: selected });
 
   useEffect(() => {
-    if (!selected || selected.type === "user") return;
-    fetchRepoData(selected.id);
-  }, [selected, fetchRepoData]);
+    if (!selected) return;
+
+    if (selected.type === "user") fetchUserData(selected.id);
+    else fetchRepoData(selected.id);
+  }, [selected, fetchRepoData, fetchUserData]);
 
   return (
     <SelectedNodeContext.Provider value={null}>

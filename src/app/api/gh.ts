@@ -1,5 +1,5 @@
 import { GITHUB_TOKEN, UserDocument, UserQuery, client } from "../graphql";
-import { Contributor } from "../types";
+import { Contributor, User } from "../types";
 import { Repository } from "../types/Repository";
 
 const API_URL = "https://api.github.com";
@@ -26,6 +26,9 @@ export const callApi = async <T>(url: string) => {
 
 export const getContributors = async (nameWithOwner: string) =>
   callApi<Contributor[]>(`/repos/${nameWithOwner}/contributors`);
+
+export const getUser = async (login: string) =>
+  callApi<User>(`/users/${login}`);
 
 export const getRepository = async (nameWithOwner: string) =>
   callApi<Repository>(`/repos/${nameWithOwner}`);

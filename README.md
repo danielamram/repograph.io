@@ -1,34 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# RepoGraph.io
 
-## Getting Started
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/danielamram/repograph.io/blob/main/LICENSE)
+<!-- [![Build Status](https://img.shields.io/travis/your-username/repo-graph/main.svg)](https://travis-ci.org/your-username/repo-graph) -->
+<!-- [![Coverage Status](https://coveralls.io/repos/github/your-username/repo-graph/badge.svg?branch=main)](https://coveralls.io/github/your-username/repo-graph?branch=main) -->
 
-First, run the development server:
+Welcome to RepoGraph.io, an application that enables you to explore GitHub repositories and their contributors in a visually appealing and interactive way. This tool allows you to gain insights into repositories and the people who contribute to them, facilitating collaboration and discovery in the GitHub community.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+![RepoGraph.io Screenshot](https://your-username.github.io/repo-graph/screenshot.png)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Interactive Graph Visualization**: The application provides an interactive graph visualization of repositories and contributors, making it easier to explore relationships and dependencies.
+- **Repository Details**: Get detailed information about each repository, such as the number of stars, forks, open issues, and the primary programming language used.
+- **Contributor Insights**: Dive into contributor statistics, including commit history, pull requests, and issues created.
+- **Filtering and Searching**: Filter and search repositories and contributors based on various criteria, such as programming languages, repository size, and user activity.
+- **User Profiles**: Explore user profiles to learn more about their GitHub activity, repositories, and contributions.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## Installation
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+To run RepoGraph.io locally, follow these steps:

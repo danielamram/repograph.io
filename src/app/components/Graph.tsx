@@ -1,12 +1,12 @@
 import { FC, useRef } from "react";
+import { IGraph, NodeData } from "../types";
 import {
   GraphCanvas,
   GraphCanvasRef,
   SphereWithIcon,
   darkTheme,
   useSelection,
-} from "reagraph";
-import { IGraph, NodeData } from "../types";
+} from "./ThreeGraph";
 
 const Graph: FC<{ graph: IGraph; onNodeClick: (data?: NodeData) => void }> = ({
   graph,
